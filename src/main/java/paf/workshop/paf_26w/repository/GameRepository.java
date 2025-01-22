@@ -19,4 +19,8 @@ public class GameRepository {
             .skip(offset);
         return template.find(q, Document.class, "games");
     }
+
+    public long getCount() {
+        return template.count(new Query(), "games");
+    }
 }
