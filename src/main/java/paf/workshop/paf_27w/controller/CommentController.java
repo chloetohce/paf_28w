@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import paf.workshop.paf_27w.model.Comment;
 import paf.workshop.paf_27w.service.CommentService;
+
 
 
 
@@ -78,5 +78,15 @@ public class CommentController {
         }
     }
     
-
+    @GetMapping(path="/review/{id}/history", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCommentHistory(@PathVariable String id) {
+        try {
+            Document d;
+            d = commentService.getCommentHistory(id);
+            return ResponseEntity.ok().body(d.toJson());
+        } catch (Exception e) {
+            return new ResponseEntity<>("{\"message\": \"%s\"}".formatted(e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+    
 }

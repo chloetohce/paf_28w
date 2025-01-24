@@ -25,8 +25,6 @@ public class CommentRepository {
         Query q = new Query(criteria);
         Document doc = template.findOne(q, Document.class, "comments");
         Optional<Document> result = Optional.ofNullable(doc);
-        result.ifPresent(d -> d.replace("edited", true));
-        result.ifPresent(d -> d.putIfAbsent("edited", false));
         return result;
     }
 

@@ -1,6 +1,7 @@
 package paf.workshop.paf_27w.service;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,16 @@ public class CommentService {
     }
 
     public Document getCommentById(String id) throws Exception {
-        return commentRepository.getCommentById(id)
-            .map(d -> d.append("timestamp", new Date()))
-            .orElseThrow(() -> new Exception("Could not find comment with id %s.".formatted(id)));
+        Optional<Document> opt =  commentRepository.getCommentById(id)
+            .map(d -> d.append("timestamp", new Date()));
+        opt.ifPresent(d -> d.replace("edited", true));
+        opt.ifPresent(d -> d.putIfAbsent("edited", false));
+        return opt.orElseThrow(() -> new Exception("Could not find comment with id %s.".formatted(id)));
+    }
+
+    public Document getCommentHistory(String id) throws Exception {
+        Optional<Document> opt =  commentRepository.getCommentById(id)
+            .map(d -> d.append("timestamp", new Date()));
+        return opt.orElseThrow(() -> new Exception("Could not find comment with id %s.".formatted(id)));
     }
 }
