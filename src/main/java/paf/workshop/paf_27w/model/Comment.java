@@ -13,13 +13,13 @@ public class Comment {
     private String user;
 
     @Schema(description="rating of game", example="5")
-    private int rating;
+    private Integer rating;
 
     @Schema(description = "comment review body (optional)", requiredMode=RequiredMode.NOT_REQUIRED)
     private String comment;
 
     @Schema(description="game id", example="10")
-    private int gid;
+    private Integer gid;
 
     @Schema(description="date of comment", example="2025-01-01")
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -44,11 +44,11 @@ public class Comment {
         this.user = user;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -60,11 +60,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public int getGid() {
+    public Integer getGid() {
         return gid;
     }
 
-    public void setGid(int gameId) {
+    public void setGid(Integer gameId) {
         this.gid = gameId;
     }
 

@@ -63,6 +63,7 @@ public class CommentController {
             commentService.updateComment(comment, id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>("{\"message\": \"%s\"}".formatted(e.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
