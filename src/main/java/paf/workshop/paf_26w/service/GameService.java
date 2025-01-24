@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,13 +61,16 @@ public class GameService {
         return buildResponseGames(gamesBuilder.build(), limit, offset);
     }
 
-    public JsonObject getGameById(int id) {
+    public Optional<JsonObject> getGameById(int id) {
         Document result = repository.getGameById(id);
-        return Json.createObjectBuilder(
+        if (result == null) {
+            return Optional.empty();
+        }
+        return Optional.of(Json.createObjectBuilder(
             Json.createReader(new StringReader(result.toJson()
                 .replace("_id", "game_id")))
             .readObject())
             .add("timestamp", LocalDateTime.now().toString())
-            .build();
+            .build());
     }
 }

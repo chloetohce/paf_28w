@@ -1,5 +1,7 @@
 package paf.workshop.paf_26w.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,8 +41,11 @@ public class GameController {
 
     @GetMapping(path="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGameById(@PathVariable String id) {
-        JsonObject result = service.getGameById(Integer.parseInt(id));
-        return new ResponseEntity<>(result.toString(), HttpStatus.OK);
+        Optional<JsonObject> result = service.getGameById(Integer.parseInt(id));
+        return new ResponseEntity<>(result
+                .map(Object::toString)
+                .orElse("{\"message\": \"Game with ID of %s does not exist.\"}".formatted(id)),
+             HttpStatus.OK);
     }
     
     
