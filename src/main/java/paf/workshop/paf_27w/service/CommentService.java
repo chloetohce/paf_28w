@@ -1,5 +1,7 @@
 package paf.workshop.paf_27w.service;
 
+import java.util.Date;
+
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +40,11 @@ public class CommentService {
             throw new Exception("Error updating comment with id %s".formatted(id));
         }
         return true;
+    }
+
+    public Document getCommentById(String id) throws Exception {
+        return commentRepository.getCommentById(id)
+            .map(d -> d.append("timestamp", new Date()))
+            .orElseThrow(() -> new Exception("Could not find comment with id %s.".formatted(id)));
     }
 }

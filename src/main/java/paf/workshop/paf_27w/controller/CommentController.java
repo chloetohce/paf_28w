@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,6 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import paf.workshop.paf_27w.model.Comment;
 import paf.workshop.paf_27w.service.CommentService;
+
 
 
 @RestController
@@ -44,7 +47,7 @@ public class CommentController {
         }
     }
 
-    @PutMapping("/review/{id}")
+    @PutMapping(path="/review/{id}", consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(requestBody = @RequestBody(
         content=@Content(
             mediaType=MediaType.APPLICATION_FORM_URLENCODED_VALUE,
@@ -63,5 +66,17 @@ public class CommentController {
             return new ResponseEntity<>("{\"message\": \"%s\"}".formatted(e.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(path="/review/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCommentById(@PathVariable String id) {
+        try {
+            Document d;
+            d = commentService.getCommentById(id);
+            return ResponseEntity.ok().body(d.toJson());
+        } catch (Exception e) {
+            return new ResponseEntity<>("{\"message\": \"%s\"}".formatted(e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
 }

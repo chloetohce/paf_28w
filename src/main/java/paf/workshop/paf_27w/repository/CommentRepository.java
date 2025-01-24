@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.client.result.UpdateResult;
 
-import jakarta.json.Json;
 import paf.workshop.paf_27w.model.Comment;
 
 @Repository
@@ -21,10 +20,14 @@ public class CommentRepository {
     @Autowired
     private MongoTemplate template;
 
-    public Document getCommentById(String id) {
+    public Optional<Document> getCommentById(String id) {
         Criteria criteria = Criteria.where("_id").is(id);
         Query q = new Query(criteria);
-        return template.findOne(q, Document.class, "comments");
+        Document doc = template.findOne(q, Document.class, "comments");
+        Optional<Document> result = Optional.ofNullable(doc);
+        result.ifPresent(d -> d.replace("edited", true));
+        result.ifPresent(d -> d.putIfAbsent("edited", false));
+        return result;
     }
 
     public Document addComment(Comment comment) {
@@ -38,8 +41,8 @@ public class CommentRepository {
         return inserted;
     }
     
-    public UpdateResult updateComment(Comment comment, String id) {
-        Document old = getCommentById(id);
+    public UpdateResult updateComment(Comment comment, String id) throws Exception {
+        Document old = getCommentById(id).orElseThrow(() -> new Exception("Comment with id %s could not be found. ".formatted(id)));
         Query q = Query.query(Criteria.where("_id").is(id));
         Update update = new Update()
             .set("rating", 
@@ -51,12 +54,10 @@ public class CommentRepository {
             .set("posted", new Date())
             .push("edited")
                 .each(
-                    Json.createObjectBuilder()
-                        .add("comment", old.getString("c_text"))
-                        .add("rating", old.getInteger("rating"))
-                        .add("posted", old.getOrDefault("posted", new Date()).toString())
-                        .build()
-                        .toString()
+                    new Document()
+                        .append("comment", old.getString("c_text"))
+                        .append("rating", old.getInteger("rating"))
+                        .append("posted", old.getOrDefault("posted", new Date()))
                 );
         return template.updateFirst(q, update, Document.class, "comments");
     }
