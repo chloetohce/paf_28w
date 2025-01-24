@@ -42,10 +42,10 @@ public class GameController {
     @GetMapping(path="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGameById(@PathVariable String id) {
         Optional<JsonObject> result = service.getGameById(Integer.parseInt(id));
-        return new ResponseEntity<>(result
-                .map(Object::toString)
-                .orElse("{\"message\": \"Game with ID of %s does not exist.\"}".formatted(id)),
-             HttpStatus.OK);
+        return result
+                .map(obj -> ResponseEntity.ok(obj.toString()))
+                .orElse(new ResponseEntity<>("{\"message\": \"Game with ID of %s does not exist.\"}".formatted(id),
+                    HttpStatus.NOT_FOUND));
     }
     
     
