@@ -1,4 +1,4 @@
-package paf.workshop.paf_26w.controller;
+package paf.workshop.paf_27w.controller;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.json.JsonObject;
-import paf.workshop.paf_26w.service.GameService;
+import paf.workshop.paf_27w.service.GameService;
 
 
 @RestController

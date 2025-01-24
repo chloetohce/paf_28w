@@ -1,4 +1,4 @@
-package paf.workshop.paf_26w.model;
+package paf.workshop.paf_27w.model;
 
 public class Game {
     private int gid;

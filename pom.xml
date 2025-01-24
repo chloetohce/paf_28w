@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>paf.workshop</groupId>
-    <artifactId>paf_26w</artifactId>
+    <artifactId>paf_27w</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>paf_26w</name>
+    <name>paf_27w</name>
     <description>Demo project for Spring Boot</description>
     <url/>
     <licenses>

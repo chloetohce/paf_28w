@@ -1,4 +1,4 @@
-package paf.workshop.paf_26w.service;
+package paf.workshop.paf_27w.service;
 
 import java.io.StringReader;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
-import paf.workshop.paf_26w.repository.GameRepository;
+import paf.workshop.paf_27w.repository.GameRepository;
 
 @Service
 public class GameService {
