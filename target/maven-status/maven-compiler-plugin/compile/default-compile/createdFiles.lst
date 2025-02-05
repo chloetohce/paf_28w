@@ -1,0 +1,9 @@
+paf/workshop/paf_27w/repository/CommentRepository.class
+paf/workshop/paf_27w/model/Game.class
+paf/workshop/paf_27w/Paf27wApplication.class
+paf/workshop/paf_27w/service/GameService.class
+paf/workshop/paf_27w/controller/GameController.class
+paf/workshop/paf_27w/model/Comment.class
+paf/workshop/paf_27w/service/CommentService.class
+paf/workshop/paf_27w/repository/GameRepository.class
+paf/workshop/paf_27w/controller/CommentController.class
