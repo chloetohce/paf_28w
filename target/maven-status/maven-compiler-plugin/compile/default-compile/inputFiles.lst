@@ -1,9 +1,11 @@
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/Paf27wApplication.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/controller/CommentController.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/controller/GameController.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/model/Comment.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/model/Game.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/repository/CommentRepository.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/repository/GameRepository.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/service/CommentService.java
-/Users/chloe/VTTP/paf/paf_27w/src/main/java/paf/workshop/paf_27w/service/GameService.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\controller\CommentController.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\controller\GameController.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\controller\GameReviewsController.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\model\Comment.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\model\Game.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\Paf28wApplication.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\repository\CommentRepository.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\repository\GameRepository.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\repository\GameReviewsRepository.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\service\CommentService.java
+C:\Users\Chloe Toh\vttp\paf\paf_28w\src\main\java\paf\workshop\paf_28w\service\GameService.java

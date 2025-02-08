@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>paf.workshop</groupId>
-    <artifactId>paf_27w</artifactId>
+    <artifactId>paf_28w</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>paf_27w</name>
+    <name>paf_28w</name>
     <description>Demo project for Spring Boot</description>
     <url/>
     <licenses>
@@ -43,7 +43,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
+        <dependency> 
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
