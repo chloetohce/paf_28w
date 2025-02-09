@@ -1,11 +1,10 @@
-paf\workshop\paf_28w\controller\GameController.class
 paf\workshop\paf_28w\model\Game.class
 paf\workshop\paf_28w\Paf28wApplication.class
-paf\workshop\paf_28w\controller\GameReviewsController.class
 paf\workshop\paf_28w\repository\GameRepository.class
 paf\workshop\paf_28w\repository\CommentRepository.class
-paf\workshop\paf_28w\repository\GameReviewsRepository.class
 paf\workshop\paf_28w\service\GameService.class
+paf\workshop\paf_28w\controller\GameController.class
+paf\workshop\paf_28w\repository\GameReviewsRepository.class
 paf\workshop\paf_28w\model\Comment.class
 paf\workshop\paf_28w\controller\CommentController.class
 paf\workshop\paf_28w\service\CommentService.class

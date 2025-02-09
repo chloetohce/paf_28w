@@ -2,20 +2,16 @@ package paf.workshop.paf_28w.repository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.AddFieldsOperation;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationExpression;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.ConvertOperators;
-import org.springframework.data.mongodb.core.aggregation.Fields;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.aggregation.MatchOperation;
-import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
-import org.springframework.data.mongodb.core.aggregation.StringOperators;
 import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
@@ -41,20 +37,24 @@ public class GameReviewsRepository {
             .first("name").as("name")
             .first("year").as("year")
             .first("ranking").as("ranking")
-            .avg("reviews.rating").as("average")
+            .avg("reviews.rating").as("average")    
             .first("users_rated").as("users_rated")
             .first("url").as("url")
             .first("image").as("image")
             .push("$reviews.link")
                 .as("reviews");
         
-        ProjectionOperation addDate = Aggregation.project(
-            "_id", "name", "year", "ranking", "average", "users_rated", "url", "image", "reviews"
-        )
-            .and(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                .as("timestamp");
+        AddFieldsOperation timestamp = Aggregation.addFields()
+            .addFieldWithValue("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
+            .build();
         
-        Aggregation pipeline = Aggregation.newAggregation(matchId, lookup, unwind, group, addDate);
-        return template.aggregate(pipeline, "games", Document.class).getMappedResults().getFirst();
+        Aggregation pipeline = Aggregation.newAggregation(matchId, lookup, unwind, group, timestamp);
+        Document d = template.aggregate(pipeline, "games", Document.class).getMappedResults().getFirst();
+
+        // Change reviews link
+        List<String> links = d.getList("reviews", String.class);
+        links.replaceAll(i -> "/review/" + i);
+        d.replace("reviews", links);
+        return d;
     }
 }
