@@ -21,4 +21,8 @@ public class GameReviewsService {
             return Optional.empty();
         }
     }
+
+    public Document getHighestLowest(String order) {
+        return repository.getHighestLowest(order);
+    }
 }

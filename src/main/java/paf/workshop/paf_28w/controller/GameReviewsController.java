@@ -15,12 +15,12 @@ import paf.workshop.paf_28w.service.GameReviewsService;
 
 
 @RestController
-@RequestMapping("/game")
+@RequestMapping("")
 public class GameReviewsController {
     @Autowired
     private GameReviewsService service;
     
-    @GetMapping(path="{id}/reviews", produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/game/{id}/reviews", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getGameReviews(@PathVariable int id) {
         Optional<String> opt = service.getGameReviews(id).map(d -> d.toJson());
         return ResponseEntity.ok()
@@ -30,5 +30,19 @@ public class GameReviewsController {
                     .build().toString()
             ));
     }
+
+    @GetMapping(path = "/games/reviews/{order}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getHighestLowest(@PathVariable(required = true) String order) {
+        if (!order.equals("highest") && !order.equals("lowest")) {
+            return ResponseEntity.badRequest()
+                .body(Json.createObjectBuilder()
+                    .add("message", "Invalid request. URI should only contain 'highest' or 'lowest'.")
+                    .build().toString());
+        }
+
+        return ResponseEntity.ok()
+            .body(service.getHighestLowest(order).toJson());
+    }
+    
     
 }
